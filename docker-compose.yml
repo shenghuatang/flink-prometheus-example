@@ -38,7 +38,7 @@ services:
     volumes:
     - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     - ./prometheus/flink.rules.yml:/etc/prometheus/flink.rules.yml
-
+  
   grafana:
     image: grafana/grafana:7.4.2
     container_name: grafana
@@ -48,6 +48,16 @@ services:
     - GF_SECURITY_ADMIN_PASSWORD=flink
     volumes:
     - ./grafana/provisioning/:/etc/grafana/provisioning/
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: cadvisor
+    ports:
+     - 8080:8080
+    volumes:
+     - /:/rootfs:ro
+     - /var/run:/var/run:rw
+     - /sys:/sys:ro
 
 volumes:
   state:
