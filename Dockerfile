@@ -2,8 +2,6 @@
 #COPY . .
 #RUN gradle shadowJar
 
-
-
 FROM flink:scala_2.11-java11
 COPY files $FLINK_HOME/files/
 RUN rm $FLINK_HOME/lib/*; \
